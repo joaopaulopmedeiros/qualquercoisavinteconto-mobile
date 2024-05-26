@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
+import 'package:qualquercoisavinteconto/constants/routes.dart';
+import 'package:qualquercoisavinteconto/screens/signin_screen.dart';
 import 'package:qualquercoisavinteconto/screens/splash_screen.dart';
 
 void main() {
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
+      routes: {
+        signInRoute: (ctx) => const SignInScreen(),
+      },
     );
   }
 }

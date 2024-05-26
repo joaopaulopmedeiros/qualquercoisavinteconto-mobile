@@ -3,6 +3,7 @@ import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/images.dart';
+import 'package:qualquercoisavinteconto/constants/routes.dart';
 import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -14,6 +15,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  changeScreen() {
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushNamed(context, signInRoute);
+    });
+  }
+
+  @override
+  void initState() {
+    changeScreen();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
