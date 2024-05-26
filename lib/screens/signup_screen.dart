@@ -26,12 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             (context.screenHeight * 0.1).heightBox,
             appLogoWidget(),
             10.heightBox,
-            "Primeiro Acesso"
-                .text
-                .fontFamily(bold)
-                .white
-                .size(18)
-                .make(),
+            "Primeiro Acesso".text.fontFamily(bold).white.size(18).make(),
             12.heightBox,
             Column(
               children: [
@@ -45,7 +40,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onPressed: () {})
                     .box
                     .width(context.screenWidth - 50)
-                    .make(),                
+                    .make(),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: "Voltar".text.color(fontGrey).make(),
+                  ),
+                )
               ],
             )
                 .box
