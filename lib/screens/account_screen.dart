@@ -3,17 +3,38 @@ import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
+import 'package:qualquercoisavinteconto/models/user.dart';
 import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+class ProfileButton {
+  String name;
+  String route;
+
+  ProfileButton({required this.name, required this.route});
+}
+
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
+  List<ProfileButton> createProfileButtons(User? currentUser) {
+    List<ProfileButton> buttons = [];
+
+    buttons
+        .add(ProfileButton(name: 'Meus Endereços', route: manageAddressRoute));
+
+    if (currentUser != null && currentUser.isAdmin()) {
+      buttons.add(
+          ProfileButton(name: 'Gerenciar Produtos', route: manageProductRoute));
+    }
+    return buttons;
+  }
+
   @override
   Widget build(BuildContext context) {
-    const profileButtonsList = ["Meus Endereços", "Meus Pedidos", "Outros"];
     final provider = Provider.of<AuthProvider>(context, listen: false);
+    final profileButtonsList = createProfileButtons(provider.getCurrentUser());
     return backgroundWidget(
         child: Scaffold(
       body: Center(
@@ -40,15 +61,11 @@ class AccountScreen extends StatelessWidget {
                       final buttonText = profileButtonsList[index];
                       return GestureDetector(
                         onTap: () {
-                          if (index == 0) {
-                            Navigator.pushNamed(context, manageAddressRoute);
-                          } else {
-                            Navigator.pushNamed(context, homeRoute);
-                          }
+                          Navigator.pushNamed(context, buttonText.route);
                         },
                         child: ListTile(
                           title: Text(
-                            buttonText,
+                            buttonText.name,
                           ),
                         ),
                       );

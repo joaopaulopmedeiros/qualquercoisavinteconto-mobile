@@ -19,4 +19,8 @@ class User {
       roles: roleList,
     );
   }
+
+  bool isAdmin() {
+    return roles.any((role) => role.name == 'ADMIN');
+  }
 }
