@@ -44,7 +44,23 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () {})
                     .box
                     .width(context.screenWidth - 50)
-                    .make()
+                    .make(),
+                10.heightBox,
+                RichText(
+                    text: const TextSpan(children: [
+                  TextSpan(
+                    text: "Ainda não possui uma conta? ",
+                    style: TextStyle(color: fontGrey),
+                  ),
+                  TextSpan(
+                    text: "Clique aqui",
+                    style: TextStyle(
+                      color: redColor,
+                      decoration: TextDecoration.underline,
+                      decorationColor: redColor,
+                    ),
+                  ),
+                ])),
               ],
             )
                 .box
