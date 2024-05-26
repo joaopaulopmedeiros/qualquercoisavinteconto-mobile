@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
-import 'package:qualquercoisavinteconto/constants/fonts.dart';
+import 'package:qualquercoisavinteconto/screens/account_screen.dart';
 import 'package:qualquercoisavinteconto/screens/catalog_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,11 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: pc,
           onPageChanged: setPaginaAtual,
           children: const [
-            CatalogScreen()
+            CatalogScreen(),
+            AccountScreen()
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: redColor, 
         currentIndex: paginaAtual,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
