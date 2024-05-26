@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:qualquercoisavinteconto/constants/http.dart';
 import 'package:qualquercoisavinteconto/dtos/signin_request.dart';
 import 'package:http/http.dart' as http;
 import 'package:qualquercoisavinteconto/dtos/signin_response.dart';
@@ -16,7 +17,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       var body = jsonEncode(dto.toJson());
       final response = await http.post(
-        Uri.parse('http://localhost:8080/signin'),
+        Uri.parse(apiBaseUrl),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
