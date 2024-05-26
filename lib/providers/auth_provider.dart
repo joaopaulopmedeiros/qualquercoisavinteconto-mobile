@@ -8,6 +8,10 @@ import 'package:qualquercoisavinteconto/dtos/signin_response.dart';
 class AuthProvider extends ChangeNotifier {
   String _accessToken = "";
 
+  bool isAuthenticated() {
+    return _accessToken != "";
+  }
+
   Future<void> signIn(SignInRequestDto dto) async {
     try {
       var body = jsonEncode(dto.toJson());
