@@ -67,6 +67,23 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
     }
   }
 
+  Future<void> editAddress(Address address) async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final userId = authProvider.getCurrentUser()?.id ?? 0;
+    await showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return AddressFormWidget(
+          street: address.street,
+          number: address.number,
+          city: address.city,
+          state: address.state,
+          userId: userId.toString(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +112,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    //todo
+                   editAddress(addresses[i]);
                   },
                 ),
                 IconButton(
