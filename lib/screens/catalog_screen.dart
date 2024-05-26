@@ -1,30 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/models/product.dart';
 import 'package:qualquercoisavinteconto/providers/catalog_provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
-    final catalogProvider = Provider.of<CatalogProvider>(context, listen: false);
+    final catalogProvider =
+        Provider.of<CatalogProvider>(context, listen: false);
     catalogProvider.fetchProducts();
-    
+
     return Consumer<CatalogProvider>(
       builder: (ctx, catalogProvider, _) {
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 3/2,
-            mainAxisSpacing: 8,
-            childAspectRatio: 0.7,
-          ),
-          itemCount: catalogProvider.products.length,
-          itemBuilder: (ctx, index) {
-            final product = catalogProvider.products[index];
-            return ProductItem(product: product);
-          },
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            10.heightBox,
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Catálogo de Produtos',
+                style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold, color: fontGrey),
+              ),
+            ),
+            10.heightBox,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 3 / 2,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemCount: catalogProvider.products.length,
+                  itemBuilder: (ctx, index) {
+                    final product = catalogProvider.products[index];
+                    return ProductItem(product: product);
+                  },
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -60,12 +83,12 @@ class ProductItem extends StatelessWidget {
               children: [
                 Text(
                   product.name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   '\$${product.price}',
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
               ],
             ),
