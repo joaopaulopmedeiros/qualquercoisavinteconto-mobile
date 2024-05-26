@@ -8,6 +8,7 @@ import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/providers/catalog_provider.dart';
 import 'package:qualquercoisavinteconto/screens/home_screen.dart';
 import 'package:qualquercoisavinteconto/screens/manage_address_screen.dart';
+import 'package:qualquercoisavinteconto/screens/manage_product.dart';
 import 'package:qualquercoisavinteconto/screens/product_details_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signin_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signup_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
               return ProductDetailsScreen(product: product);
             },
             manageAddressRoute: (ctx) => const ManageAddressScreen(),
+            manageProductRoute: (ctx) => const ManageProductScreen(),
           },
         ));
   }
