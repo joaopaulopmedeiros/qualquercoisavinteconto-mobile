@@ -13,6 +13,7 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const profileButtonsList = ["Meus Endereços", "Meus Pedidos", "Outros"];
     final provider = Provider.of<AuthProvider>(context, listen: false);
     return backgroundWidget(
         child: Scaffold(
@@ -21,23 +22,26 @@ class AccountScreen extends StatelessWidget {
           children: [
             (context.screenHeight * 0.05).heightBox,
             10.heightBox,
-            "Olá, ${provider.getCurrentUser()?.name}".text.fontFamily(bold).white.size(18).make(),
+            "Olá, ${provider.getCurrentUser()?.name}"
+                .text
+                .fontFamily(bold)
+                .white
+                .size(18)
+                .make(),
             50.heightBox,
             Column(
               children: [
-                RichText(
-                    text: TextSpan(children: [
-                  TextSpan(
-                    text: "Meus endereços",
-                    style: const TextStyle(
-                      color: primaryColor,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.pushNamed(context, homeRoute);
-                      },
-                  ),
-                ])),
+                ListView.separated(
+                    shrinkWrap: true,
+                    separatorBuilder: (context, index) {
+                      return const Divider(color: lightGrey);
+                    },
+                    itemCount: profileButtonsList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: profileButtonsList[index].text.make(),
+                      );
+                    }).box.white.rounded.make()
               ],
             )
                 .box
