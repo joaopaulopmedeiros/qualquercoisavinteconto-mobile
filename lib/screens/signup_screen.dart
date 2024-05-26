@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/forms.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
+import 'package:qualquercoisavinteconto/dtos/signup_request.dart';
+import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/custom_button.dart';
@@ -17,6 +20,29 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> handleSubmit(BuildContext context) async {
+    final name = _nameController.text;
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final signUpData = SignUpRequestDto(name: name, email: email, password: password);
+
+    try {
+      await Provider.of<AuthProvider>(context, listen: false).signUp(signUpData);
+      if (context.mounted) {
+        Navigator.pushNamed(context, homeRoute);
+      }
+    } catch (e) {
+      if (context.mounted) {
+        const snackBar = SnackBar(content: Text('Cadastro inválido!'), backgroundColor: lightRedColor);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return backgroundWidget(
@@ -31,19 +57,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
             12.heightBox,
             Column(
               children: [
-                customTextField(hint: nameHint, title: nameTitle),
-                customTextField(hint: emailHint, title: emailTitle),
-                customTextField(hint: passwordHint, title: passwordTitle, obscureText: true),
+                customTextField(
+                    hint: nameHint,
+                    title: nameTitle,
+                    controller: _nameController),
+                customTextField(
+                    hint: emailHint,
+                    title: emailTitle,
+                    controller: _emailController),
+                customTextField(
+                    hint: passwordHint,
+                    title: passwordTitle,
+                    controller: _passwordController,
+                    obscureText: true),
                 customButton(
-                        color: redColor,
-                        title: "Finalizar",
-                        textColor: whiteColor,
-                        onPressed: () {
-                          Navigator.pushNamed(context, homeRoute);
-                        })
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                    color: redColor,
+                    title: "Finalizar",
+                    textColor: whiteColor,
+                    onPressed: () async {
+                      await handleSubmit(context);
+                    }).box.width(context.screenWidth - 50).make(),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(

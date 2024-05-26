@@ -1,13 +1,13 @@
 import 'package:qualquercoisavinteconto/models/user.dart';
 
-class SignInResponseDto {
+class AuthResponseDto {
   final String accessToken;
   final User identity;
 
-  SignInResponseDto({required this.accessToken, required this.identity});
+  AuthResponseDto({required this.accessToken, required this.identity});
 
-  factory SignInResponseDto.fromJson(Map<String, dynamic> json) {
-    return SignInResponseDto(
+  factory AuthResponseDto.fromJson(Map<String, dynamic> json) {
+    return AuthResponseDto(
       accessToken: json['accessToken'],
       identity: User.fromJson(json['identity']),
     );
