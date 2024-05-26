@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
+import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
+import 'package:qualquercoisavinteconto/widgets/custom_button.dart';
 import 'package:qualquercoisavinteconto/widgets/custom_text_field.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -30,13 +32,27 @@ class _SignInScreenState extends State<SignInScreen> {
                 .white
                 .size(18)
                 .make(),
-            10.heightBox,
+            12.heightBox,
             Column(
               children: [
                 customTextField(hint: "tester@admin.com", title: "Email"),
-                customTextField(hint: "******", title: "Senha"),                
+                customTextField(hint: "******", title: "Senha"),
+                customButton(
+                        color: redColor,
+                        title: "Entrar",
+                        textColor: whiteColor,
+                        onPressed: () {})
+                    .box
+                    .width(context.screenWidth - 50)
+                    .make()
               ],
-            ).box.white.rounded.padding(const EdgeInsets.all(16)).width(context.screenWidth - 50).make()
+            )
+                .box
+                .white
+                .rounded
+                .padding(const EdgeInsets.all(16))
+                .width(context.screenWidth - 50)
+                .make()
           ],
         ),
       ),
