@@ -12,4 +12,5 @@ A mobile flutter client application.
 <img src="./docs/Simulator Screenshot - iPhone 15 - 2024-05-26 at 18.00.44.png" width=200>
 <img src="./docs/Simulator Screenshot - iPhone 15 - 2024-05-26 at 18.45.40.png" width=200>
 <img src="./docs/Simulator Screenshot - iPhone 15 - 2024-05-26 at 20.26.48.png" width=200>
+<img src="./docs/Simulator Screenshot - iPhone 15 - 2024-05-26 at 20.50.42.png" width=200>
 </p>
