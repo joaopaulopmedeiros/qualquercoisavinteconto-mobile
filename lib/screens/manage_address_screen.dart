@@ -8,6 +8,7 @@ import 'dart:convert';
 
 import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/utils/http.dart';
+import 'package:qualquercoisavinteconto/widgets/address_form_widget.dart';
 
 class ManageAddressScreen extends StatefulWidget {
   const ManageAddressScreen({super.key});
@@ -27,12 +28,12 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
 
   Future<void> fetchAddresses() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final authToken = authProvider.getAccessToken();
+    final accessToken = authProvider.getAccessToken();
     final userId = authProvider.getCurrentUser()?.id ?? 0;
 
     final response = await http.get(
       Uri.parse('$apiBaseUrl/addresses/user/$userId'),
-      headers: {'Authorization': 'Bearer $authToken'},
+      headers: {'Authorization': 'Bearer $accessToken'},
     );
 
     if (isSuccessful(response)) {
@@ -54,10 +55,10 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
 
   Future<void> deleteAddress(int id) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final authToken = authProvider.getAccessToken();
+    final accessToken = authProvider.getAccessToken();
     final response = await http.delete(
       Uri.parse('$apiBaseUrl/addresses/$id'),
-      headers: {'Authorization': 'Bearer $authToken'},
+      headers: {'Authorization': 'Bearer $accessToken'},
     );
     if (isSuccessful(response)) {
       fetchAddresses();
@@ -109,7 +110,14 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return const AddressFormWidget();
+            },
+          );
+        },
         backgroundColor: primaryColor,
         child: const Icon(Icons.add, color: Colors.white,),
       ),
