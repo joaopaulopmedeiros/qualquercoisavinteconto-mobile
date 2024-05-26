@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
+import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/providers/catalog_provider.dart';
 import 'package:qualquercoisavinteconto/screens/home_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signin_screen.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => CatalogProvider()),
+          ChangeNotifierProvider(create: (context) => AuthProvider()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

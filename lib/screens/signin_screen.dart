@@ -1,15 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/forms.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
+import 'package:qualquercoisavinteconto/dtos/signin_request.dart';
 import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/custom_button.dart';
 import 'package:qualquercoisavinteconto/widgets/custom_text_field.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../providers/auth_provider.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -19,6 +23,22 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> handleSubmit(BuildContext context) async {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final loginData = SignInRequestDto(email: email, password: password);
+    
+    await Provider.of<AuthProvider>(context, listen: false).signIn(loginData);
+
+    if (context.mounted) {
+      Navigator.pushNamed(context, homeRoute);
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return backgroundWidget(
@@ -38,15 +58,18 @@ class _SignInScreenState extends State<SignInScreen> {
             12.heightBox,
             Column(
               children: [
-                customTextField(hint: emailHint, title: emailTitle),
-                customTextField(hint: passwordHint, title: passwordTitle),
+                customTextField(hint: emailHint, title: emailTitle, controller: _emailController),
+                customTextField(hint: passwordHint, title: passwordTitle, controller: _passwordController),
                 customButton(
-                    color: redColor,
-                    title: "Entrar",
-                    textColor: whiteColor,
-                    onPressed: () {
-                      Navigator.pushNamed(context, homeRoute);
-                    }).box.width(context.screenWidth - 50).make(),
+                        color: redColor,
+                        title: "Entrar",
+                        textColor: whiteColor,
+                        onPressed: () async {
+                          await handleSubmit(context);
+                        })
+                    .box
+                    .width(context.screenWidth - 50)
+                    .make(),
                 10.heightBox,
                 RichText(
                     text: TextSpan(children: [
