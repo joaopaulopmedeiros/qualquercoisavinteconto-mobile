@@ -66,7 +66,7 @@ class ProductItem extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          productDetail,
+          productDetailRoute,
           arguments: product,
         );
       },

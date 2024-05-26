@@ -38,8 +38,17 @@ class AccountScreen extends StatelessWidget {
                     },
                     itemCount: profileButtonsList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: profileButtonsList[index].text.make(),
+                      final buttonText = profileButtonsList[index];
+                      return GestureDetector(
+                        onTap: () {
+                          if (index == 0) Navigator.pushNamed(context, manageAddressRoute);
+                          Navigator.pushNamed(context, homeRoute);
+                        },
+                        child: ListTile(
+                          title: Text(
+                            buttonText,
+                          ),
+                        ),
                       );
                     }).box.white.rounded.make()
               ],

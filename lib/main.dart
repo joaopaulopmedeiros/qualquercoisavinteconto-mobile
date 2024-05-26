@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
             signInRoute: (ctx) => const SignInScreen(),
             signUpRoute: (ctx) => const SignUpScreen(),
             homeRoute: (ctx) => const HomeScreen(),
-            productDetail: (context) {
+            productDetailRoute: (context) {
               final product = ModalRoute.of(context)!.settings.arguments as Product;
               return ProductDetailsScreen(product: product);
             },
