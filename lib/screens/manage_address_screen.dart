@@ -53,7 +53,12 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
   }
 
   Future<void> deleteAddress(int id) async {
-    final response = await http.delete(Uri.parse('$apiBaseUrl/addresses/$id'));
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final authToken = authProvider.getAccessToken();
+    final response = await http.delete(
+      Uri.parse('$apiBaseUrl/addresses/$id'),
+      headers: {'Authorization': 'Bearer $authToken'},
+    );
     if (isSuccessful(response)) {
       fetchAddresses();
     } else {
