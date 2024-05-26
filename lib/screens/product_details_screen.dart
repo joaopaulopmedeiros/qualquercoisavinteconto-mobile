@@ -16,6 +16,7 @@ class ProductDetailsScreen extends StatelessWidget {
           product.name,
           style: const TextStyle(color: whiteColor, fontSize: 18, fontWeight: FontWeight.bold),
         ),
+        iconTheme: const IconThemeData(color: whiteColor),
       ),
       body: Container(
         color: backgroundGrey,
