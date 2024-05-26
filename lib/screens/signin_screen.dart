@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
+import 'package:qualquercoisavinteconto/constants/forms.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
 import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
@@ -37,8 +38,8 @@ class _SignInScreenState extends State<SignInScreen> {
             12.heightBox,
             Column(
               children: [
-                customTextField(hint: "tester@admin.com", title: "Email"),
-                customTextField(hint: "******", title: "Senha"),
+                customTextField(hint: emailHint, title: emailTitle),
+                customTextField(hint: passwordHint, title: passwordTitle),
                 customButton(
                         color: redColor,
                         title: "Entrar",
