@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
+import 'package:qualquercoisavinteconto/constants/routes.dart';
 import 'package:qualquercoisavinteconto/screens/account_screen.dart';
 import 'package:qualquercoisavinteconto/screens/catalog_screen.dart';
 
@@ -26,26 +27,33 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: redColor,
-        title: const Text(applicationName, style: TextStyle(color: whiteColor, fontSize: 16, fontWeight: FontWeight.bold)),
+        title: const Text(applicationName,
+            style: TextStyle(
+                color: whiteColor, fontSize: 18, fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(signInRoute);
+              },
+              icon: const Icon(Icons.logout, color: lightGrey)),
+        ],
       ),
       body: Container(
         color: backgroundGrey,
         child: PageView(
           controller: pc,
           onPageChanged: setPaginaAtual,
-          children: const [
-            CatalogScreen(),
-            AccountScreen()
-          ],
+          children: const [CatalogScreen(), AccountScreen()],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: redColor, 
+        selectedItemColor: redColor,
         currentIndex: paginaAtual,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Minha Conta'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: 'Minha Conta'),
         ],
         onTap: (pagina) {
           pc.animateToPage(
