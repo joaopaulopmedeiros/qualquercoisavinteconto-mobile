@@ -70,7 +70,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 customTextField(
                     hint: passwordHint,
                     title: passwordTitle,
-                    controller: _passwordController),
+                    controller: _passwordController,
+                    obscureText: true
+                    ),
                 customButton(
                     color: redColor,
                     title: "Entrar",
