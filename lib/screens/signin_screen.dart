@@ -41,13 +41,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 customTextField(hint: emailHint, title: emailTitle),
                 customTextField(hint: passwordHint, title: passwordTitle),
                 customButton(
-                        color: redColor,
-                        title: "Entrar",
-                        textColor: whiteColor,
-                        onPressed: () {})
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                    color: redColor,
+                    title: "Entrar",
+                    textColor: whiteColor,
+                    onPressed: () {
+                      Navigator.pushNamed(context, catalogRoute);
+                    }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 RichText(
                     text: TextSpan(children: [

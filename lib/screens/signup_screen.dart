@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/forms.dart';
+import 'package:qualquercoisavinteconto/constants/routes.dart';
 import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/custom_button.dart';
@@ -37,7 +38,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: redColor,
                         title: "Finalizar",
                         textColor: whiteColor,
-                        onPressed: () {})
+                        onPressed: () {
+                          Navigator.pushNamed(context, catalogRoute);
+                        })
                     .box
                     .width(context.screenWidth - 50)
                     .make(),
