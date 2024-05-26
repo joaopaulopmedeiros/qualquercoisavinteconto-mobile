@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
+import 'package:qualquercoisavinteconto/models/product.dart';
 import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/providers/catalog_provider.dart';
 import 'package:qualquercoisavinteconto/screens/home_screen.dart';
+import 'package:qualquercoisavinteconto/screens/product_details_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signin_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signup_screen.dart';
 import 'package:qualquercoisavinteconto/screens/splash_screen.dart';
@@ -43,7 +45,11 @@ class MyApp extends StatelessWidget {
           routes: {
             signInRoute: (ctx) => const SignInScreen(),
             signUpRoute: (ctx) => const SignUpScreen(),
-            homeRoute: (ctx) => const HomeScreen()
+            homeRoute: (ctx) => const HomeScreen(),
+            productDetail: (context) {
+              final product = ModalRoute.of(context)!.settings.arguments as Product;
+              return ProductDetailsScreen(product: product);
+            },
           },
         ));
   }
