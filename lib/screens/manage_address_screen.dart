@@ -108,6 +108,11 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: primaryColor,
+        child: const Icon(Icons.add, color: Colors.white,),
+      ),
     );
   }
 }
