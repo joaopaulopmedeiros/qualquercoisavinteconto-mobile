@@ -40,7 +40,7 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                'Price: \$${product.price}',
+                'Preço: R\$ ${product.price}',
                 style: const TextStyle(fontSize: 18, color: Colors.grey),
               ),
             ],

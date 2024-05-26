@@ -97,7 +97,7 @@ class ProductItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '\$${product.price}',
+                    'R\$ ${product.price}',
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
