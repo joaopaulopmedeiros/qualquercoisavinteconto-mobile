@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Container(
-        color: backgroundGrey,
+        color: Colors.grey[200],
         child: PageView(
           controller: pc,
           onPageChanged: setPaginaAtual,

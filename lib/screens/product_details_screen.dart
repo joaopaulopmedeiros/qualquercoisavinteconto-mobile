@@ -19,11 +19,21 @@ class ProductDetailsScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: whiteColor),
       ),
       body: Container(
-        color: backgroundGrey,
+        color: Colors.grey[200],
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10), 
+                child: Image.network(
+                  product.imageUrl,
+                  height: 200,
+                  width: 200,
+                  fit: BoxFit.cover, 
+                ),
+              ),
+              const SizedBox(height: 20),
               Text(
                 product.name,
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -32,12 +42,6 @@ class ProductDetailsScreen extends StatelessWidget {
               Text(
                 'Price: \$${product.price}',
                 style: const TextStyle(fontSize: 18, color: Colors.grey),
-              ),
-              const SizedBox(height: 20),
-              Image.network(
-                product.imageUrl,
-                height: 400,
-                width: 500,
               ),
             ],
           ),
