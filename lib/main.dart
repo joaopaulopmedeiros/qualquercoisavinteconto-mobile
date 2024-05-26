@@ -4,7 +4,7 @@ import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
 import 'package:qualquercoisavinteconto/providers/catalog_provider.dart';
-import 'package:qualquercoisavinteconto/screens/catalog_screen.dart';
+import 'package:qualquercoisavinteconto/screens/home_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signin_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signup_screen.dart';
 import 'package:qualquercoisavinteconto/screens/splash_screen.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           routes: {
             signInRoute: (ctx) => const SignInScreen(),
             signUpRoute: (ctx) => const SignUpScreen(),
-            catalogRoute: (ctx) => const CatalogScreen()
+            homeRoute: (ctx) => const HomeScreen()
           },
         ));
   }

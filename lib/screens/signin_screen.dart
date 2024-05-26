@@ -45,7 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     title: "Entrar",
                     textColor: whiteColor,
                     onPressed: () {
-                      Navigator.pushNamed(context, catalogRoute);
+                      Navigator.pushNamed(context, homeRoute);
                     }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 RichText(

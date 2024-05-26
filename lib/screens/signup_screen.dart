@@ -39,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         title: "Finalizar",
                         textColor: whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, catalogRoute);
+                          Navigator.pushNamed(context, homeRoute);
                         })
                     .box
                     .width(context.screenWidth - 50)
