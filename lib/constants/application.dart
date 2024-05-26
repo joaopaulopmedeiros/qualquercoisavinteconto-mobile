@@ -1,0 +1,1 @@
+const applicationName = 'Qualquer Coisa Vinte Conto';
