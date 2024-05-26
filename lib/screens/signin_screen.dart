@@ -30,14 +30,19 @@ class _SignInScreenState extends State<SignInScreen> {
     final email = _emailController.text;
     final password = _passwordController.text;
     final loginData = SignInRequestDto(email: email, password: password);
-    
-    await Provider.of<AuthProvider>(context, listen: false).signIn(loginData);
 
-    if (context.mounted) {
-      Navigator.pushNamed(context, homeRoute);
+    try {
+      await Provider.of<AuthProvider>(context, listen: false).signIn(loginData);
+      if (context.mounted) {
+        Navigator.pushNamed(context, homeRoute);
+      }
+    } catch (e) {
+      if (context.mounted) {
+        const snackBar = SnackBar(content: Text('E-mail e/ou senha incorretos!'), backgroundColor: lightRedColor);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,18 +63,21 @@ class _SignInScreenState extends State<SignInScreen> {
             12.heightBox,
             Column(
               children: [
-                customTextField(hint: emailHint, title: emailTitle, controller: _emailController),
-                customTextField(hint: passwordHint, title: passwordTitle, controller: _passwordController),
+                customTextField(
+                    hint: emailHint,
+                    title: emailTitle,
+                    controller: _emailController),
+                customTextField(
+                    hint: passwordHint,
+                    title: passwordTitle,
+                    controller: _passwordController),
                 customButton(
-                        color: redColor,
-                        title: "Entrar",
-                        textColor: whiteColor,
-                        onPressed: () async {
-                          await handleSubmit(context);
-                        })
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                    color: redColor,
+                    title: "Entrar",
+                    textColor: whiteColor,
+                    onPressed: () async {
+                      await handleSubmit(context);
+                    }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 RichText(
                     text: TextSpan(children: [
