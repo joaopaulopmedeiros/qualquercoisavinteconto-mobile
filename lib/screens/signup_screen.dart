@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 customTextField(hint: nameHint, title: nameTitle),
                 customTextField(hint: emailHint, title: emailTitle),
-                customTextField(hint: passwordHint, title: passwordTitle),
+                customTextField(hint: passwordHint, title: passwordTitle, obscureText: true),
                 customButton(
                         color: redColor,
                         title: "Finalizar",
