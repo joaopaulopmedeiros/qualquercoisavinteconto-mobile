@@ -5,5 +5,5 @@ const Color textfieldGrey = Color.fromRGBO(209, 209, 209, 1);
 const Color fontGrey = Color.fromRGBO(107, 115, 119, 1);
 const Color backgroundGrey =Color.fromARGB(255, 216, 222, 226);
 const Color lightGrey = Color.fromRGBO(239, 239, 239, 1);
-const Color redColor = Color.fromRGBO(230, 46, 4, 1);
-const Color lightRedColor = Color.fromRGBO(240, 78, 42, 1);
+const Color redColor = Color.fromRGBO(108, 42, 240, 1);
+const Color lightRedColor = Color.fromRGBO(108, 42, 240, 1);
