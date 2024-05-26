@@ -78,6 +78,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
           number: address.number,
           city: address.city,
           state: address.state,
+          addressId: address.id,
           userId: userId.toString(),
         );
       },

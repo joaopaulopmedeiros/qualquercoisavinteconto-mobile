@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/http.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
@@ -13,6 +14,7 @@ class AddressFormWidget extends StatefulWidget {
   final String? number;
   final String? city;
   final String? state;
+  final int? addressId;
   final String? userId;
 
   const AddressFormWidget({super.key, 
@@ -20,6 +22,7 @@ class AddressFormWidget extends StatefulWidget {
     this.number,
     this.city,
     this.state,
+    this.addressId,
     this.userId,
   });
 
@@ -47,6 +50,7 @@ class _AddressFormWidgetState extends State<AddressFormWidget> {
     final String number = _numberController.text;
     final String city = _cityController.text;
     final String state = _stateController.text;
+    final int? addressId = widget.addressId;
 
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final userId = authProvider.getCurrentUser()?.id ?? 0;
@@ -61,15 +65,7 @@ class _AddressFormWidgetState extends State<AddressFormWidget> {
     };
 
     try {
-      final response = await http.post(
-        Uri.parse('$apiBaseUrl/addresses'),
-        headers: {
-          'accept': '*/*',
-          'Authorization': 'Bearer $accessToken',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(requestBody),
-      );
+      final response = await callApi(accessToken, requestBody, addressId);
 
       if (isSuccessful(response)) {
         Navigator.pushNamed(context, manageAddressRoute);
@@ -79,6 +75,32 @@ class _AddressFormWidgetState extends State<AddressFormWidget> {
     } catch (error) {
       throw Exception('Error submitting address: $error');
     }
+  }
+
+    
+  Future<Response> callApi(String accessToken, Map<String, dynamic> requestBody, int? addressId) async {
+    
+    if (addressId != null && addressId > 0) {
+        return await http.put(
+        Uri.parse('$apiBaseUrl/addresses/$addressId'),
+        headers: {
+          'accept': '*/*',
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(requestBody),
+      );      
+    }
+
+    return await http.post(
+        Uri.parse('$apiBaseUrl/addresses'),
+        headers: {
+          'accept': '*/*',
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(requestBody),
+      );
   }
 
   @override
@@ -106,7 +128,9 @@ class _AddressFormWidgetState extends State<AddressFormWidget> {
         ),
         const SizedBox(height: 16),
         ElevatedButton(
-          onPressed: _submitForm,
+          onPressed: () async {
+            await _submitForm();
+          },
           child: const Text('Finalizar'),
         ),
       ],
