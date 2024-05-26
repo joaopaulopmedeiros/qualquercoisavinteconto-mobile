@@ -3,24 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/models/product.dart';
 import 'package:qualquercoisavinteconto/providers/catalog_provider.dart';
 
-class CatalogScreen extends StatefulWidget {
-  const CatalogScreen({Key? key});
-
-  @override
-  State<CatalogScreen> createState() => _CatalogScreenState();
-}
-
-class _CatalogScreenState extends State<CatalogScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero).then((_) {
-      Provider.of<CatalogProvider>(context, listen: false).fetchProducts();
-    });
-  }
-
+class CatalogScreen extends StatelessWidget {
+  const CatalogScreen({super.key});
+  
   @override
   Widget build(BuildContext context) {
+    final catalogProvider = Provider.of<CatalogProvider>(context, listen: false);
+    catalogProvider.fetchProducts();
+    
     return Consumer<CatalogProvider>(
       builder: (ctx, catalogProvider, _) {
         return GridView.builder(
@@ -44,7 +34,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
 class ProductItem extends StatelessWidget {
   final Product product;
 
-  const ProductItem({Key? key, required this.product}) : super(key: key);
+  const ProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +45,7 @@ class ProductItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.network(
               product.imageUrl,
               height: 170,
