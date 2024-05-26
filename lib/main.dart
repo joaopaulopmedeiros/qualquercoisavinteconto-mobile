@@ -7,6 +7,7 @@ import 'package:qualquercoisavinteconto/models/product.dart';
 import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/providers/catalog_provider.dart';
 import 'package:qualquercoisavinteconto/screens/home_screen.dart';
+import 'package:qualquercoisavinteconto/screens/manage_address_screen.dart';
 import 'package:qualquercoisavinteconto/screens/product_details_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signin_screen.dart';
 import 'package:qualquercoisavinteconto/screens/signup_screen.dart';
@@ -46,10 +47,11 @@ class MyApp extends StatelessWidget {
             signInRoute: (ctx) => const SignInScreen(),
             signUpRoute: (ctx) => const SignUpScreen(),
             homeRoute: (ctx) => const HomeScreen(),
-            productDetailRoute: (context) {
-              final product = ModalRoute.of(context)!.settings.arguments as Product;
+            productDetailRoute: (ctx) {
+              final product = ModalRoute.of(ctx)!.settings.arguments as Product;
               return ProductDetailsScreen(product: product);
             },
+            manageAddressRoute: (ctx) => const ManageAddressScreen(),
           },
         ));
   }

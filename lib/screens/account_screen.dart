@@ -40,8 +40,11 @@ class AccountScreen extends StatelessWidget {
                       final buttonText = profileButtonsList[index];
                       return GestureDetector(
                         onTap: () {
-                          if (index == 0) Navigator.pushNamed(context, manageAddressRoute);
-                          Navigator.pushNamed(context, homeRoute);
+                          if (index == 0) {
+                            Navigator.pushNamed(context, manageAddressRoute);
+                          } else {
+                            Navigator.pushNamed(context, homeRoute);
+                          }
                         },
                         child: ListTile(
                           title: Text(
