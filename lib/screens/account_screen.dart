@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:qualquercoisavinteconto/constants/application.dart';
+import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
-import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
+import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -13,26 +13,22 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AuthProvider>(context, listen: false);
     return backgroundWidget(
         child: Scaffold(
       body: Center(
         child: Column(
           children: [
             (context.screenHeight * 0.05).heightBox,
-            appLogoWidget(),
             10.heightBox,
-            "Minha Conta".text.fontFamily(bold).white.size(18).make(),
+            "Olá, ${provider.getCurrentUser()?.name}".text.fontFamily(bold).white.size(18).make(),
             50.heightBox,
             Column(
               children: [
                 RichText(
                     text: TextSpan(children: [
-                  const TextSpan(
-                    text: "",
-                    style: TextStyle(color: fontGrey),
-                  ),
                   TextSpan(
-                    text: "Gerenciar meus endereços",
+                    text: "Meus endereços",
                     style: const TextStyle(
                       color: primaryColor,
                     ),
