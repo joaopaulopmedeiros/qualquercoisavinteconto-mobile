@@ -13,6 +13,7 @@ class AuthProvider extends ChangeNotifier {
   User? _currentUser;
 
   bool isAuthenticated() => _accessToken.isNotEmpty;
+  String getAccessToken() => _accessToken;
   User? getCurrentUser() => _currentUser;
 
   Future<void> signIn(SignInRequestDto dto) async {

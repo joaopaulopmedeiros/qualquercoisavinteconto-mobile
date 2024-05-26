@@ -20,10 +20,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => CatalogProvider()),
-          ChangeNotifierProvider(create: (context) => AuthProvider()),
-        ],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProxyProvider<AuthProvider, CatalogProvider>(
+          create: (ctx) => CatalogProvider(Provider.of<AuthProvider>(ctx, listen: false)),
+          update: (ctx, authProvider, previousCatalogProvider) =>
+              CatalogProvider(authProvider),
+        ),
+      ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: applicationName,
