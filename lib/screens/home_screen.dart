@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: redColor,
+        backgroundColor: primaryColor,
         title: const Text(applicationName,
             style: TextStyle(
                 color: whiteColor, fontSize: 18, fontWeight: FontWeight.bold)),
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: redColor,
+        selectedItemColor: primaryColor,
         currentIndex: paginaAtual,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

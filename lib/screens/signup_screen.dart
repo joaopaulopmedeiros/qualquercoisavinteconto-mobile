@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
     } catch (e) {
       if (context.mounted) {
-        const snackBar = SnackBar(content: Text('Cadastro inválido!'), backgroundColor: lightRedColor);
+        const snackBar = SnackBar(content: Text('Cadastro inválido!'), backgroundColor: lightPrimaryColor);
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     controller: _passwordController,
                     obscureText: true),
                 customButton(
-                    color: redColor,
+                    color: primaryColor,
                     title: "Finalizar",
                     textColor: whiteColor,
                     onPressed: () async {

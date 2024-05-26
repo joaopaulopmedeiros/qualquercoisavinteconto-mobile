@@ -7,7 +7,7 @@ Widget customTextField({String? title, String? hint, TextEditingController? cont
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      title!.text.color(redColor).fontFamily(semiBold).fontFamily(semiBold).size(16).make(),
+      title!.text.color(primaryColor).fontFamily(semiBold).fontFamily(semiBold).size(16).make(),
       5.heightBox,
       TextFormField(
         controller: controller,
@@ -22,7 +22,7 @@ Widget customTextField({String? title, String? hint, TextEditingController? cont
           fillColor: lightGrey,
           filled: true,
           border: InputBorder.none,
-          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: redColor))
+          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: primaryColor))
         ),
       ),
       5.heightBox

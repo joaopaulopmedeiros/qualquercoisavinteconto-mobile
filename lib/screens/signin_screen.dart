@@ -38,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     } catch (e) {
       if (context.mounted) {
-        const snackBar = SnackBar(content: Text('E-mail e/ou senha incorretos!'), backgroundColor: lightRedColor);
+        const snackBar = SnackBar(content: Text('E-mail e/ou senha incorretos!'), backgroundColor: lightPrimaryColor);
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
@@ -74,7 +74,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     obscureText: true
                     ),
                 customButton(
-                    color: redColor,
+                    color: primaryColor,
                     title: "Entrar",
                     textColor: whiteColor,
                     onPressed: () async {
@@ -90,9 +90,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   TextSpan(
                     text: "Clique aqui",
                     style: const TextStyle(
-                      color: redColor,
+                      color: primaryColor,
                       decoration: TextDecoration.underline,
-                      decorationColor: redColor,
+                      decorationColor: primaryColor,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
