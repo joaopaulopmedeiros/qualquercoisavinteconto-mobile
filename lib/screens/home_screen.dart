@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
+import 'package:qualquercoisavinteconto/providers/auth_provider.dart';
 import 'package:qualquercoisavinteconto/screens/account_screen.dart';
 import 'package:qualquercoisavinteconto/screens/catalog_screen.dart';
 
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () {
+                Provider.of<AuthProvider>(context, listen: false).signOut();
                 Navigator.of(context).pushNamed(signInRoute);
               },
               icon: const Icon(Icons.logout, color: lightGrey)),

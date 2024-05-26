@@ -65,4 +65,10 @@ class AuthProvider extends ChangeNotifier {
       throw Exception('Falha ao realizar Sign Up (server-side)');
     }
   }
+
+  void signOut() {
+    _accessToken = "";
+    _currentUser = null;
+    notifyListeners();
+  }
 }
