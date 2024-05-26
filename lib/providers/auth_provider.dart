@@ -5,11 +5,14 @@ import 'package:qualquercoisavinteconto/constants/http.dart';
 import 'package:qualquercoisavinteconto/dtos/signin_request.dart';
 import 'package:http/http.dart' as http;
 import 'package:qualquercoisavinteconto/dtos/signin_response.dart';
+import 'package:qualquercoisavinteconto/models/user.dart';
 
 class AuthProvider extends ChangeNotifier {
   String _accessToken = "";
-
+  User? _currentUser;
+  
   bool isAuthenticated() => _accessToken.isNotEmpty;
+  User? getCurrentUser() => _currentUser;
 
   Future<void> signIn(SignInRequestDto dto) async {
     try {
@@ -26,6 +29,7 @@ class AuthProvider extends ChangeNotifier {
         final jsonResponse = jsonDecode(response.body);
         final signInResponse = SignInResponseDto.fromJson(jsonResponse);
         _accessToken = signInResponse.accessToken;
+        _currentUser = signInResponse.identity;
         notifyListeners();
       } else {
         throw Exception('Falha ao realizar Sign In (client-side)');
