@@ -3,6 +3,7 @@ import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
 import 'package:qualquercoisavinteconto/constants/routes.dart';
 import 'package:qualquercoisavinteconto/screens/signin_screen.dart';
+import 'package:qualquercoisavinteconto/screens/signup_screen.dart';
 import 'package:qualquercoisavinteconto/screens/splash_screen.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       routes: {
         signInRoute: (ctx) => const SignInScreen(),
+        signUpRoute: (ctx) => const SignUpScreen(),
       },
     );
   }

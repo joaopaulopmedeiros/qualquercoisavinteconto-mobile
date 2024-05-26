@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:qualquercoisavinteconto/constants/application.dart';
 import 'package:qualquercoisavinteconto/constants/colors.dart';
 import 'package:qualquercoisavinteconto/constants/fonts.dart';
+import 'package:qualquercoisavinteconto/constants/routes.dart';
 import 'package:qualquercoisavinteconto/widgets/app_logo_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/background_widget.dart';
 import 'package:qualquercoisavinteconto/widgets/custom_button.dart';
@@ -47,18 +49,22 @@ class _SignInScreenState extends State<SignInScreen> {
                     .make(),
                 10.heightBox,
                 RichText(
-                    text: const TextSpan(children: [
-                  TextSpan(
+                    text: TextSpan(children: [
+                  const TextSpan(
                     text: "Ainda não possui uma conta? ",
                     style: TextStyle(color: fontGrey),
                   ),
                   TextSpan(
                     text: "Clique aqui",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: redColor,
                       decoration: TextDecoration.underline,
                       decorationColor: redColor,
                     ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, signUpRoute);
+                      },
                   ),
                 ])),
               ],
