@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:qualquercoisavinteconto/dtos/auth_response.dart';
 import 'package:qualquercoisavinteconto/dtos/signup_request.dart';
 import 'package:qualquercoisavinteconto/models/user.dart';
+import 'package:qualquercoisavinteconto/utils/http.dart';
 
 class AuthProvider extends ChangeNotifier {
   String _accessToken = "";
@@ -27,7 +28,7 @@ class AuthProvider extends ChangeNotifier {
         body: body,
       );
 
-      if (response.statusCode == 200) {
+      if (isSuccessful(response)) {
         final jsonResponse = jsonDecode(response.body);
         final authResponse = AuthResponseDto.fromJson(jsonResponse);
         _accessToken = authResponse.accessToken;
@@ -52,7 +53,7 @@ class AuthProvider extends ChangeNotifier {
         body: body,
       );
 
-      if (response.statusCode == 200) {
+      if (isSuccessful(response)) {
         final jsonResponse = jsonDecode(response.body);
         final authResponse = AuthResponseDto.fromJson(jsonResponse);
         _accessToken = authResponse.accessToken;
