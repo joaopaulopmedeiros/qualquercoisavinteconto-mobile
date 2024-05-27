@@ -111,7 +111,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
             } else {
               return ListTile(
                 title: Text(products[i].name),
-                subtitle: Text(products[i].name),
+                subtitle: Text("Id: ${products[i].id.toString()}"),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
