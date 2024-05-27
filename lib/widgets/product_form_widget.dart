@@ -11,10 +11,15 @@ import 'package:qualquercoisavinteconto/utils/http.dart';
 
 class ProductFormWidget extends StatefulWidget {
   final String? name;
+  final double? price;
+  final List<int>? categories;
   final int? productId;
 
-  const ProductFormWidget({super.key, 
+  const ProductFormWidget({
+    super.key,
     this.name,
+    this.price,
+    this.categories,
     this.productId,
   });
 
@@ -24,15 +29,25 @@ class ProductFormWidget extends StatefulWidget {
 
 class _ProductFormWidgetState extends State<ProductFormWidget> {
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _categoriesController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _nameController.text = widget.name ?? '';
+    _priceController.text = widget.price?.toString() ?? '';
+    _categoriesController.text = widget.categories?.join(', ') ?? '';
   }
 
   Future<void> _submitForm() async {
     final String name = _nameController.text;
+    final double price = double.parse(_priceController.text);
+    final List<int> categories = _categoriesController.text
+        .split(',')
+        .map((str) => int.tryParse(str.trim()) ?? 0)
+        .where((id) => id > 0)
+        .toList();
     final int? productId = widget.productId;
 
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -40,7 +55,9 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
 
     final Map<String, dynamic> requestBody = {
       'name': name,
-      'id': productId
+      'price': price,
+      'categories': categories,
+      'id': productId,
     };
 
     try {
@@ -56,11 +73,10 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
     }
   }
 
-    
-  Future<Response> callApi(String accessToken, Map<String, dynamic> requestBody, int? productId) async {
-    
+  Future<Response> callApi(
+      String accessToken, Map<String, dynamic> requestBody, int? productId) async {
     if (productId != null && productId > 0) {
-        return await http.put(
+      return await http.put(
         Uri.parse('$apiBaseUrl/products/$productId'),
         headers: {
           'accept': '*/*',
@@ -68,18 +84,18 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(requestBody),
-      );      
+      );
     }
 
     return await http.post(
-        Uri.parse('$apiBaseUrl/products'),
-        headers: {
-          'accept': '*/*',
-          'Authorization': 'Bearer $accessToken',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(requestBody),
-      );
+      Uri.parse('$apiBaseUrl/products'),
+      headers: {
+        'accept': '*/*',
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(requestBody),
+    );
   }
 
   @override
@@ -87,21 +103,30 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
     return ChangeNotifierProvider(
       create: (context) => AuthProvider(),
       child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextFormField(
-          controller: _nameController,
-          decoration: const InputDecoration(labelText: 'Nome'),
-        ),
-        const SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: () async {
-            await _submitForm();
-          },
-          child: const Text('Finalizar'),
-        ),
-      ],
-    ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            controller: _nameController,
+            decoration: const InputDecoration(labelText: 'Nome'),
+          ),
+          TextFormField(
+            controller: _priceController,
+            decoration: const InputDecoration(labelText: 'Preço'),
+            keyboardType: TextInputType.number,
+          ),
+          TextFormField(
+            controller: _categoriesController,
+            decoration: const InputDecoration(labelText: 'Categorias (IDs separadas por vírgula)'),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () async {
+              await _submitForm();
+            },
+            child: const Text('Finalizar'),
+          ),
+        ],
+      ),
     );
   }
 }

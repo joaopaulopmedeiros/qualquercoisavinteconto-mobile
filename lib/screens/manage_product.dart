@@ -74,6 +74,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
         return ProductFormWidget(
           name: product.name,
           productId: product.id,
+          price: product.price,
         );
       },
     );
